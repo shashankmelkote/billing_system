@@ -1,0 +1,6 @@
+{
+    "httpMethod": "POST",
+    "path": "/add_record",
+    "body": "{\"PatientName\": \"John Doe\", \"DateOfVisit\": \"2025-03-27\", \"Clinician\": \"Dr. Alice\", \"Insurance\": \"Aetna\", \"DateClaimSubmitted\": \"2025-03-28\", \"DateClaimApproved\": \"2025-03-30\", \"AmountBilled\": 200, \"AmountPaid\": 100}",
+    "isBase64Encoded": false
+}  
