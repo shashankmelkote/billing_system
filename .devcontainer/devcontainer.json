@@ -1,19 +1,16 @@
 {
-    "name": "AWS SAM Dev Environment",
-    "image": "mcr.microsoft.com/devcontainers/python:3.9",
-  
-    "features": {
-      "aws-cli": "latest"
-    },
-  
-    "postCreateCommand": "curl -Lo sam.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip && unzip sam.zip -d sam-install && sudo ./sam-install/install",
-  
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "amazonwebservices.aws-toolkit-vscode",
-          "ms-python.python"
-        ]
-      }
+  "name": "AWS SAM Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/python:3.9",
+  "features": {
+    "aws-cli": "latest"
+  },
+  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "amazonwebservices.aws-toolkit-vscode",
+        "ms-python.python"
+      ]
     }
-  }  
+  }
+}
