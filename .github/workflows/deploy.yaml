@@ -22,7 +22,12 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Check SAM CLI version (pre-installed)
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - name: Check SAM CLI version
         run: sam --version
 
       - name: Build and deploy with SAM
