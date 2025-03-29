@@ -1,0 +1,6 @@
+__pycache__/
+.env
+.aws/
+*.pyc
+samconfig.toml
+*.zip

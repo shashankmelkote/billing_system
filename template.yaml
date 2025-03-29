@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  BillingTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: BillingRecords
+      AttributeDefinitions:
+        - AttributeName: RecordID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: RecordID
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  BillingLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: BillingReportLambda
+      CodeUri: src/
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: BillingRecords
+      Events:
+        AddRecord:
+          Type: Api
+          Properties:
+            Path: /add_record
+            Method: POST
+        OutstandingBillables:
+          Type: Api
+          Properties:
+            Path: /reports/outstanding_billables
+            Method: GET
+        UnpaidPatients:
+          Type: Api
+          Properties:
+            Path: /reports/unpaid_patients
+            Method: GET
+        RevenuePerMonth:
+          Type: Api
+          Properties:
+            Path: /reports/revenue_per_month
+            Method: GET
+        TopInsuranceProviders:
+          Type: Api
+          Properties:
+            Path: /reports/top_insurance_providers
+            Method: GET
