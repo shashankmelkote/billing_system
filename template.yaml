@@ -53,3 +53,8 @@ Resources:
           Properties:
             Path: /reports/top_insurance_providers
             Method: GET
+
+Outputs:
+  ApiUrl:
+    Description: "Base URL for your API Gateway"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
