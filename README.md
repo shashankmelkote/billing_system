@@ -7,7 +7,7 @@ Deployed via GitHub Actions 🚀
 
 ## Running Tests
 
-Install the application and test dependencies, then run `pytest`:
+Install the application and test dependencies (including boto3 for integration tests), then run `pytest`:
 
 ```bash
 pip install -r src/requirements.txt -r requirements-test.txt
@@ -21,6 +21,8 @@ coverage html
 ```
 
 The report will be available in the `htmlcov` directory.
+
+GitHub Actions automatically runs all unit and integration tests on every commit so you can be confident in code quality.
 
 ## Local Development
 
