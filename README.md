@@ -7,10 +7,10 @@ Deployed via GitHub Actions 🚀
 
 ## Running Tests
 
-Install dependencies from `src/requirements.txt` and run `pytest`:
+Install the application and test dependencies, then run `pytest`:
 
 ```bash
-pip install -r src/requirements.txt
+pip install -r src/requirements.txt -r requirements-test.txt
 pytest
 ```
 
@@ -36,7 +36,7 @@ The report will be available in the `htmlcov` directory.
 2. Install dependencies and development tools:
 
    ```bash
-   pip install -r src/requirements.txt pytest coverage
+   pip install -r src/requirements.txt -r requirements-test.txt pytest coverage
    ```
 
 3. Run the unit tests to verify everything is set up correctly:
@@ -67,7 +67,7 @@ If you prefer a preconfigured cloud environment, this repository includes a
 4. Once the codespace is running, install Python dependencies and run the tests:
 
    ```bash
-   pip install -r src/requirements.txt
+   pip install -r src/requirements.txt -r requirements-test.txt
    pytest
    ```
 
@@ -109,6 +109,24 @@ If you prefer a preconfigured cloud environment, this repository includes a
    - `http://127.0.0.1:3000/reports/unpaid_patients`
    - `http://127.0.0.1:3000/reports/revenue_per_month`
    - `http://127.0.0.1:3000/reports/top_insurance_providers`
+
+## Infrastructure as Code
+
+All AWS resources for the billing system are defined in `template.yaml`. To
+allow GitHub Actions to deploy the stack, an IAM role is provided in
+`deploy_role.yaml`. Deploy the role once per AWS account and store the resulting
+ARN in the `AWS_ROLE_TO_ASSUME` GitHub secret:
+
+```bash
+aws cloudformation deploy \
+  --template-file deploy_role.yaml \
+  --stack-name github-actions-role \
+  --parameter-overrides GitHubRepo=<your-org>/<your-repo> \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+After the role exists, simply run `sam deploy` (or push to `main`) to recreate
+the rest of the infrastructure.
 
 ## Contributing
 
