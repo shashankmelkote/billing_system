@@ -54,6 +54,32 @@ The report will be available in the `htmlcov` directory.
 
    The service will be available at `http://127.0.0.1:3000`.
 
+## Development with GitHub Codespaces
+
+If you prefer a preconfigured cloud environment, this repository includes a
+`.devcontainer` that works with [GitHub Codespaces](https://github.com/features/codespaces).
+
+1. On GitHub, click the **Code** dropdown and choose **Codespaces**.
+2. Select **Create codespace on main** (or your branch) to start a new instance.
+3. The container will be built automatically and run the `postCreateCommand.sh`
+   script to install the AWS SAM CLI and configure the AWS CLI using your
+   `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` codespace secrets.
+4. Once the codespace is running, install Python dependencies and run the tests:
+
+   ```bash
+   pip install -r src/requirements.txt
+   pytest
+   ```
+
+5. To try the API from the codespace, run:
+
+   ```bash
+   sam build
+   sam local start-api
+   ```
+
+   The forwarded port will expose the service at `http://127.0.0.1:3000`.
+
 ## Manual End-to-End Testing with Postman
 
 1. Ensure the local API is running (`sam local start-api`).
