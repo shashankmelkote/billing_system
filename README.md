@@ -13,3 +13,11 @@ Install dependencies from `src/requirements.txt` and run `pytest`:
 pip install -r src/requirements.txt
 pytest
 ```
+
+To generate an HTML coverage report, run:
+
+```bash
+coverage html
+```
+
+The report will be available in the `htmlcov` directory.
